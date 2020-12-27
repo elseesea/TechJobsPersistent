@@ -3,12 +3,14 @@
 
 <form asp-controller="Employer" asp-action="ProcessAddEmployerForm" method="post">
     <div class="form-group">
-        <label>Employer Name</label>
-        <input />
+        <label asp-for="Name">Employer Name</label>
+        <input asp-for="Name"class="form-control" />
+        <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
-        <label>Employer Location</label>
-        <input />
+        <label asp-for="Location">Employer Location</label>
+        <input asp-for="Location" class="form-control"/>
+        <span asp-validation-for="Location"></span>
     </div>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Add Employer" />
 </form>

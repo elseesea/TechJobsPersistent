@@ -28,6 +28,8 @@ namespace TechJobsPersistent.Controllers
             return View(employers);
         }
 
+        
+        [HttpGet]
         public IActionResult Add()
         {
             AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
@@ -37,7 +39,7 @@ namespace TechJobsPersistent.Controllers
             return View(addEmployerViewModel);
         }
 
-        [HttpPost]
+        [HttpPost("/Employer/Add")]
         public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
             if (ModelState.IsValid)
