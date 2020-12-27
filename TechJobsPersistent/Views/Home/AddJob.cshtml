@@ -4,8 +4,8 @@
 <form asp-controller="Home" asp-action="ProcessAddJobForm" method="post">
     <div class="form-group">
         <label>Name</label>
-        <input class="form-control" />
-        <span></span>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
         <label asp-for="EmployerId">Employers</label>
@@ -16,12 +16,12 @@
         </p>
     </div>
     <div class="form-group">
-        <label asp-for="Skills">Skills</label>
+        <p>Skills</p>
         @if (Model.Skills != null)
         {
             foreach (Skill skill in Model.Skills)
             {
-                <input type="checkbox" name="selectedSkills" value="@skill.Id" />
+                <input type="checkbox" name="selectedSkills" value="@skill.Id" /> @skill.Name<br />
             }
         }
         <p>

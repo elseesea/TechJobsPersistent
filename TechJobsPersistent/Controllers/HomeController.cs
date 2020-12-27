@@ -16,13 +16,17 @@ namespace TechJobsPersistent.Controllers
     public class HomeController : Controller
     {
         private JobDbContext context;
+        private List<Employer> allEmployers;
+        private List<Skill> allSkills;
 
         public HomeController(JobDbContext dbContext)
         {
             context = dbContext;
-        }
+            allEmployers = context.Employers.ToList();
+            allSkills = context.Skills.ToList();
+    }
 
-        public IActionResult Index()
+    public IActionResult Index()
         {
             List<Job> jobs = context.Jobs.Include(j => j.Employer).ToList();
 
@@ -32,13 +36,11 @@ namespace TechJobsPersistent.Controllers
         [HttpGet("/Add")]
         public IActionResult AddJob()
         {
-            List<Employer> employers = context.Employers.ToList();
-            List<Skill> skills = context.Skills.ToList();
-            AddJobViewModel addJobViewModel = new AddJobViewModel(employers, skills);
+            AddJobViewModel addJobViewModel = new AddJobViewModel(allEmployers, allSkills);
             return View(addJobViewModel);
         }
 
-        [HttpPost("/Add")]
+        [HttpPost]
         public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel, string[] selectedSkills)
         {
             if (ModelState.IsValid)
@@ -57,7 +59,7 @@ namespace TechJobsPersistent.Controllers
                 {
                     foreach (Skill skill in possibleSkills)
                     {
-                        if (selectedSkill.Equals(skill.Name))
+                        if (selectedSkill.Equals(skill.Id.ToString()))
                         {
                             JobSkill jobskill = new JobSkill
                             {
@@ -79,7 +81,9 @@ namespace TechJobsPersistent.Controllers
             }
             else
             {
-                return View("Add", addJobViewModel);
+                //addJobViewModel.Employers = allEmployers;
+                //addJobViewModel.Skills = allSkills;
+                return View("AddJob", addJobViewModel);
             }
         }
 

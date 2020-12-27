@@ -22,7 +22,7 @@ namespace TechJobsPersistent.ViewModels
         {
             Skills = new List<SelectListItem>();
 
-            foreach (var skill in possibleSkills)
+            foreach (Skill skill in possibleSkills)
             {
                 Skills.Add(new SelectListItem
                 {
