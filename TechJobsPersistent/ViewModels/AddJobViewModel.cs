@@ -11,14 +11,15 @@ namespace TechJobsPersistent.ViewModels
     public class AddJobViewModel
     {
         [Required(ErrorMessage = "Name is required")]
+        [StringLength(50, ErrorMessage = "Name must be at least 3 characters & at most 100 characters", MinimumLength = 3)]
         public string Name { get; set; }
         public int EmployerId { get; set; }
-        public List<SelectListItem> Employers { get; set; }// = new List<SelectListItem>();
+        public List<SelectListItem> Employers { get; set; } = new List<SelectListItem>();
         public List<Skill> Skills { get; set; } = new List<Skill>();
 
         public AddJobViewModel(List<Employer> employers, List<Skill> skills)
         {
-            Employers = new List<SelectListItem>();
+            //Employers = new List<SelectListItem>();
             foreach (Employer employer in employers)
             {
                 Employers.Add(new SelectListItem
