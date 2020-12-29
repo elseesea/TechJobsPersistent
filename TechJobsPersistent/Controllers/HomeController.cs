@@ -83,11 +83,21 @@ namespace TechJobsPersistent.Controllers
             {
                 foreach (Employer employer in allEmployers)
                 {
+                    SelectListItem employerSelection = new SelectListItem();
+                    employerSelection.Value = employer.Id.ToString();
+                    employerSelection.Text = employer.Name;
+                    if (employer.Id == addJobViewModel.EmployerId)
+                    {
+                        employerSelection.Selected = true;
+                    }
+                    addJobViewModel.Employers.Add(employerSelection);
+/*
                     addJobViewModel.Employers.Add(new SelectListItem
                     {
                         Value = employer.Id.ToString(),
                         Text = employer.Name
                     });
+*/
                 }
                 addJobViewModel.Skills = allSkills;
                 return View("AddJob", addJobViewModel);

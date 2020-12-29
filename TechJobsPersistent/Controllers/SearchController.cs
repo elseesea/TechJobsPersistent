@@ -33,7 +33,7 @@ namespace TechJobsPersistent.Controllers
             List<Job> jobs;
             List<JobDetailViewModel> displayJobs = new List<JobDetailViewModel>();
 
-            if (string.IsNullOrEmpty(searchTerm))
+            if (string.IsNullOrEmpty(searchTerm) || searchType.Equals("all"))
             {
                 jobs = context.Jobs
                    .Include(j => j.Employer)
