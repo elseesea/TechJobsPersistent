@@ -13,3 +13,7 @@
 
 --Part 3
 
+	SELECT name, description
+	FROM skills
+	INNER JOIN jobskills ON jobskills.SkillId = skills.Id
+	ORDER BY name ASC
